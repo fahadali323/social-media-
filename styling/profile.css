@@ -1,0 +1,26 @@
+.blue_bar {
+    height: 50px;
+    background-color: #405d9b;
+    color: #d9dfeb;
+}
+.title {
+    width: 800px;
+    margin: auto;
+    font-size: 30px;
+    font-family: inherit;
+}
+.search_box {
+    width: 400px;
+    height: 20px;
+    border-radius: 5px;
+    border:none;
+    padding: 4px;
+    font-size: 14px;
+    background-image: url(./../assets/search.png);
+    background-repeat: no-repeat; 
+    background-position: right;
+}
+img {
+    width: 50px;
+    float: right;
+}
