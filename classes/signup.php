@@ -54,7 +54,7 @@ class SignUp
         users(userid, first_name, last_name, gender, email, password, url_address) 
         values
         ('$userid', '$first_name', '$last_name', '$gender', '$email', '$password','$url_address')";
-
+        
         $Db = new Database();
         $Db->save($query);
     }

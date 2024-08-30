@@ -1,3 +1,33 @@
+<?php 
+
+include("classes/connect.php");
+include("classes/login.php");
+
+$email = "";
+$password = "";
+
+
+if($_SERVER['REQUEST_METHOD'] == "POST")
+{
+  $login = new Login();
+  $result = $login->evaluate($_POST);
+
+  if ($result !="")
+  {
+    echo "<div style='text-align:center; font-size: 12px; color:white;background-color:grey;'>";
+    echo "The following errors occured <br>";
+    echo $result;
+    echo "</div>";
+  } else {
+    header("Location: ./inner_pages/profile.php");
+    die;
+  }
+
+  $email = $_POST['email'];
+  $password = $_POST['password'];
+
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -17,6 +47,7 @@
               <div class="lux">
                 <h3>Login to MySocial</h3>
                 <input
+                  value="<?php echo $email ?>"
                   type="text"
                   class="inputtext"
                   name="email"
@@ -27,6 +58,7 @@
               </div>
               <div class="lux">
                 <input
+                  value="<?php echo $password ?>"
                   type="password"
                   class="inputtext"
                   name="pass"
@@ -35,20 +67,23 @@
                 />
               </div>
               <div class="blue_button">
-                <button value="1" class="bluebutton" name="login" type="submit">
-                  Log In
-                </button>
-              </div>
+              <input
+                class="bluebutton"
+                type="submit"
+                id="button"
+                value="Log In"
+              />
+            </div>
               <div class="forgot">
-                <a href="./forgotten.html">Fogot password?</a>
+                <a href="./forgotten.php">Fogot password?</a>
               </div>
               <div class="break"></div>
               <div>
                   <a
                   role="button"
                   class="breakbutton"
-                  href="./signup.html"
-                  rel="async"
+                  href="./signup.php"
+  
                   >Create new account</a
                   >
               </div>

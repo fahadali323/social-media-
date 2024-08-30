@@ -19,7 +19,7 @@
       echo $result;
       echo "</div>";
     } else {
-      header("Location: ./inner_pages/profile.php");
+      header("Location: login.php");
       die;
     }
 
@@ -27,10 +27,7 @@
     $last_name = $_POST['last_name'];
     $gender = $_POST['gender'];
     $email = $_POST['email'];
- 
-    // echo "<pre>";
-    // print_r($_POST);
-    // echo "</pre>";
+
   }
 
 ?>
@@ -124,7 +121,7 @@
           </form>
           <div class="break"></div>
           <div>
-            <a role="button" class="breakbutton" href="./login.html" rel="async"
+            <a role="button" class="breakbutton" href="./login.php" rel="async"
               >Log In</a
             >
           </div>
