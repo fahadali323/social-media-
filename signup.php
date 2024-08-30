@@ -18,6 +18,9 @@
       echo "The following errors occured <br>";
       echo $result;
       echo "</div>";
+    } else {
+      header("Location: ./inner_pages/profile.php");
+      die;
     }
 
     $first_name = $_POST['first_name'];
