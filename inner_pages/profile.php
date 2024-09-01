@@ -1,4 +1,28 @@
 <?php
+  include("./../classes/connect.php");
+  include("./../classes/login.php"); 
+
+  // unset($_SESSION['mysocial_userid']);
+  // echo ($_SESSION['mysocial_userid']);
+  //check if user is logged in
+  if(isset($_SESSION['mysocial_userid']) && is_numeric($_SESSION['mysocial_userid']))
+  {
+    $id = $_SESSION['mysocial_userid'];
+    $login = new Login();
+   
+    $result = $login->check_login($id);
+    if($result){
+      //retrive user data
+      echo "everything is fine";
+    }else {
+      header("Location: login.php");
+      die;
+    }  
+  } else {
+    header("Location: ./../login.php");
+    die;
+  }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

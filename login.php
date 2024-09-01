@@ -46,33 +46,34 @@ if($_SERVER['REQUEST_METHOD'] == "POST")
             <div class="right">
               <div class="lux">
                 <h3>Login to MySocial</h3>
+                <form action="" method="POST" >
+                  <input
+                    value="<?php echo $email ?>"
+                    type="text"
+                    class="inputtext"
+                    name="email"
+                    id="text"
+                    placeholder="Email"
+                  />
+                </div>
+                <div class="lux">
+                  <input
+                    value="<?php echo $password ?>"
+                    type="password"
+                    class="inputtext"
+                    name="password"
+                    id="pass"
+                    placeholder="Password"
+                  />
+                </div>
+                <div class="blue_button">
                 <input
-                  value="<?php echo $email ?>"
-                  type="text"
-                  class="inputtext"
-                  name="email"
-                  id="email"
-                  placeholder="Email"
-                  autofocus="1"
+                  class="bluebutton"
+                  type="submit"
+                  id="button"
+                  value="Log In"
                 />
-              </div>
-              <div class="lux">
-                <input
-                  value="<?php echo $password ?>"
-                  type="password"
-                  class="inputtext"
-                  name="pass"
-                  id="pass"
-                  placeholder="Password"
-                />
-              </div>
-              <div class="blue_button">
-              <input
-                class="bluebutton"
-                type="submit"
-                id="button"
-                value="Log In"
-              />
+              </form>
             </div>
               <div class="forgot">
                 <a href="./forgotten.php">Fogot password?</a>

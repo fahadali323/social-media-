@@ -34,7 +34,8 @@ class Database
         if(!$result) 
         {
             return false;
-        } else {
+        } else 
+        {
             return true;
         }
     }

@@ -1,22 +1,43 @@
 <?php
+session_start();
+
 class Login 
 {
-    private $error = " ";
+    private $error = "";
     public function evaluate($data)
     {
-        $email =  addslashes($data['email']);
-        $password = addslashes($data['password']);
+        $email =  addsLashes($data['email']);
+        $password = addsLashes($data['password']);
 
         $query = "select * from users where email='$email' limit 1";
 
         $DB = new Database();
-        $result = $Db->read($query);
+        $result = $DB->read($query);
         
-        if($result){
-            
+        if($result) {
+            $row = $result[0];
 
-        } 
-        return $error;
+            if($password == $row['password'])
+            {
+                //create session data
+                $_SESSION['mysocial_userid'] = $row['userid'];
+            } else {
+                $this->error .= "Wrong password<br>";
+            }
+        } else {
+            $this->error .= "No such email was found!<br>";
+        }
+        return $this->error;
     }
+    public function check_login($id){
+        $query = "select userid from users where userid = '$id' limit 1 ";        
 
+        $DB = new Database();
+        $result = $DB->read($query);
+
+        if ($result) {
+            return true;
+        }
+        return false;
+    }
 }
