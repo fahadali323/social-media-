@@ -48,21 +48,7 @@
   </head>
   <body>
     <!--Top Bar-->
-    <div class="blue_bar">
-      <div class="title">
-        MySocial
-        <input
-          type="text"
-          class="search_box"
-          id="search_box"
-          placeholder="Search for people"
-        />
-        <img class="selfie" src="./../assets/selfie.jpg" alt="selfie image" />
-        <a href="./../logout.php">
-          <span style="color: white;font-size:13px; float:right; margin: 11px">Logout</span>
-        </a>
-      </div>
-    </div>
+    <?php include("header.php") ?>
     <!--cover area-->
     <div class="content">
       <div class="contents">

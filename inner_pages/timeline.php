@@ -17,22 +17,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Profile | MySocial</title>
-    <link rel="stylesheet" href="./../styling/timeline.css" />
+    <link rel="stylesheet" href="./../styling/timeline.css?v=1" />
+
   </head>
   <body>
     <!--Top Bar-->
-    <div class="blue_bar">
-      <div class="title">
-        MySocial
-        <input
-          type="text"
-          class="search_box"
-          id="search_box"
-          placeholder="Search for people"
-        />
-        <img class="selfie" src="./../assets/selfie.jpg" alt="selfie image" />
-      </div>
-    </div>
+    <?php include("header.php") ?>
+
     <!--cover area-->
     <div class="content">
       
@@ -41,9 +32,10 @@
         <!--friends area-->
         <div class="bottom_left">
           <div class="friends_bar">
-            
             <img class="profile_pic" src="./../assets/selfie.jpg" alt="selfie_image"><br>
-            Mary Banda
+            <a class="name" href="profile.php">
+              <?php echo $user_data["first_name"] . "<br> " . $user_data["last_name"]  ?>
+            </a>
           </div>
         </div>
 

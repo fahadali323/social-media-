@@ -47,6 +47,15 @@ body {
 .profile_pic {
     width:150px;
     margin-top: -7px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+}
+.name {
+    text-decoration: none;
+    transition: font-size 0.75s;
+}
+.name:hover {
+    font-size: 14px;
 }
 
 .bottom {
