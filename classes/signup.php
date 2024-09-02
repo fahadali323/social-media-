@@ -10,6 +10,27 @@ class SignUp
                 //the below is $error = $error . "";
                 $this->error = $this->error . $key . "is empty!<br>";
             } 
+            if($key == "email"){
+                if (!preg_match("/([\w\-]+\@[\w\-]+\.[\w\-]+)/", $value)) {
+                    $this->error = $this->error . "invalid email address!<br>";
+                }
+            }
+            if($key == "first_name"){
+                if (is_numeric($value)) {
+                    $this->error = $this->error . "first name can't be number!<br>";
+                } 
+                if (strstr($value, " ")) {
+                    $this->error == $this->error . "first name can't be empty!<br>";
+                }
+            }
+            if($key == "last_name"){
+                if (is_numeric($value)) {
+                    $this->error = $this->error . "last name can't be number!<br>";
+                }
+                if (strstr($value, " ")) {
+                    $this->error = $this->error . "last name can't be empty!<br>";
+                }
+            }
         }
         if ($this->error == "") {
             //no error
@@ -19,8 +40,8 @@ class SignUp
         }
     }
     public function create_user($data) {
-        $first_name = $data['first_name'];
-        $last_name = $data['last_name'];
+        $first_name = ucfirst($data['first_name']);
+        $last_name = ucfirst($data['last_name']);
         $gender = $data['gender'];
         $email = $data['email'];
         $password = $data['password'];
@@ -33,7 +54,7 @@ class SignUp
         users(userid, first_name, last_name, gender, email, password, url_address) 
         values
         ('$userid', '$first_name', '$last_name', '$gender', '$email', '$password','$url_address')";
-
+        
         $Db = new Database();
         $Db->save($query);
     }

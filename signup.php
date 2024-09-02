@@ -18,16 +18,16 @@
       echo "The following errors occured <br>";
       echo $result;
       echo "</div>";
+    } else {
+      header("Location: login.php");
+      die;
     }
 
     $first_name = $_POST['first_name'];
     $last_name = $_POST['last_name'];
     $gender = $_POST['gender'];
     $email = $_POST['email'];
- 
-    // echo "<pre>";
-    // print_r($_POST);
-    // echo "</pre>";
+
   }
 
 ?>
@@ -121,7 +121,7 @@
           </form>
           <div class="break"></div>
           <div>
-            <a role="button" class="breakbutton" href="./login.html" rel="async"
+            <a role="button" class="breakbutton" href="./login.php" rel="async"
               >Log In</a
             >
           </div>
