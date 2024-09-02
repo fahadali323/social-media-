@@ -1,5 +1,16 @@
 <?php
-?>
+  include("./../classes/connect.php");
+  include("./../classes/login.php"); 
+  include("./../classes/user.php");
+  include("./../classes/post.php");
+
+  //isset($_SESSION['mysocial_userid'])
+  $login = new Login();
+  $user_data = $login->check_login($_SESSION["mysocial_userid"]);
+
+  ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>

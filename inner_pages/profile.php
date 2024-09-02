@@ -4,33 +4,10 @@
   include("./../classes/user.php");
   include("./../classes/post.php");
 
-  // unset($_SESSION['mysocial_userid']);
-  // echo ($_SESSION['mysocial_userid']);
-  //check if user is logged in
-  if(isset($_SESSION['mysocial_userid']) && is_numeric($_SESSION['mysocial_userid']))
-  {
-    $id = $_SESSION['mysocial_userid'];
-    $login = new Login();
-   
-    $result = $login->check_login($id);
-    if($result){
-      //retrive user data
-      $user = new User();
-      $user_data = $user->get_data($id);
+  //isset($_SESSION['mysocial_userid'])
+  $login = new Login();
+  $user_data = $login->check_login($_SESSION["mysocial_userid"]);
 
-      if(!$user_data)
-      {
-        header("Location: login.php");
-        die;
-      }
-    }else {
-      header("Location: login.php");
-      die;
-    }  
-  } else {
-    header("Location: ./../login.php");
-    die;
-  }
   // posting starts here
   if($_SERVER['REQUEST_METHOD'] == "POST")
   {
@@ -54,6 +31,12 @@
   $id = $_SESSION["mysocial_userid"];
   $posts = $post->get_posts($id);
 
+  //collect friends 
+  $user = new User();
+  $id = $_SESSION["mysocial_userid"];
+  $friends = $user->get_friends($id);
+
+  
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -61,7 +44,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Profile | MySocial</title>
-    <link rel="stylesheet" href="./../styling/profile.css" />
+    <link rel="stylesheet" href="./../styling/profile.css?v=1" />
   </head>
   <body>
     <!--Top Bar-->
@@ -97,7 +80,7 @@
           <br />
           <div class="name"><?php echo $user_data['first_name'] . " " . $user_data['last_name'] ?></div>
           <br />
-          <div class="menu_buttons">Timeline</div>
+          <div class="menu_buttons"><a href="timeline.php">Timeline</a></div>
           <div class="menu_buttons">About</div>
           <div class="menu_buttons">Friends</div>
           <div class="menu_buttons">Photos</div>
@@ -110,42 +93,16 @@
         <div class="bottom_left">
           <div class="friends_bar">
             Friends <br />
-            <div class="friends">
-              <img
-                class="friends_img"
-                src="./../assets/user1.jpg"
-                alt="guy page"
-              />
-              <br />
-              First User
-            </div>
-            <div class="friends">
-              <img
-                class="friends_img"
-                src="./../assets/user2.jpg"
-                alt="guy page"
-              />
-              <br />
-              Second User
-            </div>
-            <div class="friends">
-              <img
-                class="friends_img"
-                src="./../assets/user3.jpg"
-                alt="guy page"
-              />
-              <br />
-              African Girl
-            </div>
-            <div class="friends">
-              <img
-                class="friends_img"
-                src="./../assets/user4.jpg"
-                alt="guy page"
-              />
-              <br />
-              African Dude
-            </div>
+            <?php 
+            if ($friends)
+            {
+              foreach($friends as $FRIEND_ROW)
+              { 
+                //retreive posts for user
+                include("../friends.php");
+              }
+            }
+            ?>
           </div>
         </div>
 
@@ -171,7 +128,7 @@
                   $user = new User();
                   $ROW_USER = $user->get_user($ROW['userid']);
                   
-                  include("./../post.php");
+                  include("../post.php");
                 }
               }
             ?>
