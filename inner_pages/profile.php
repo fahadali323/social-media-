@@ -2,6 +2,7 @@
   include("./../classes/connect.php");
   include("./../classes/login.php"); 
   include("./../classes/user.php");
+  include("./../classes/post.php");
 
   // unset($_SESSION['mysocial_userid']);
   // echo ($_SESSION['mysocial_userid']);
@@ -30,6 +31,16 @@
     header("Location: ./../login.php");
     die;
   }
+  // posting starts here
+  if($_SERVER['REQUEST_METHOD'] == "POST")
+  {
+    $post = new Post();
+    $id = $_SESSION['mysocial_userid'];
+    $result = $post->create_post($id, $_POST);
+    print_r($result);
+    print_r($_POST);
+  }
+
 
 ?>
 <!DOCTYPE html>
@@ -129,9 +140,11 @@
         <!--posts area-->
         <div class="bottom_right">
           <div class="bottom_right_area">
-            <textarea placeholder="Whats on your mind?"></textarea>
-            <input class="post_button" type="submit" value="POST" />
-            <br />
+            <form method="post">
+              <textarea name="post" placeholder="Whats on your mind?"></textarea>
+              <input class="post_button" type="submit" value="POST" />
+              <br />
+            </form>
           </div>
 
           <!--posts-->
