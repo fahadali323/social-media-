@@ -1,6 +1,7 @@
 <?php
   include("./../classes/connect.php");
   include("./../classes/login.php"); 
+  include("./../classes/user.php");
 
   // unset($_SESSION['mysocial_userid']);
   // echo ($_SESSION['mysocial_userid']);
@@ -13,7 +14,14 @@
     $result = $login->check_login($id);
     if($result){
       //retrive user data
-      echo "everything is fine";
+      $user = new User();
+      $user_data = $user->get_data($id);
+
+      if(!$user_data)
+      {
+        header("Location: login.php");
+        die;
+      }
     }else {
       header("Location: login.php");
       die;
@@ -44,6 +52,9 @@
           placeholder="Search for people"
         />
         <img class="selfie" src="./../assets/selfie.jpg" alt="selfie image" />
+        <a href="./../logout.php">
+          <span style="color: white;font-size:13px; float:right; margin: 11px">Logout</span>
+        </a>
       </div>
     </div>
     <!--cover area-->
@@ -61,7 +72,7 @@
             alt="profile image"
           />
           <br />
-          <div class="name">Mary Banda</div>
+          <div class="name"><?php echo $user_data['first_name'] . " " . $user_data['last_name'] ?></div>
           <br />
           <div class="menu_buttons">Timeline</div>
           <div class="menu_buttons">About</div>
