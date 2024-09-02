@@ -1,6 +1,12 @@
 <div class="post">
     <div>
-    <img class="post_img" src="../assets/user1.jpg" alt="user profile">
+    <?php
+        $image = "../image/user_male.jpg";
+        if ($ROW_USER['gender'] == 'Female') {
+            $image = "../image/user_female.jpg";
+        } 
+    ?>
+    <img class="post_img" src="<?php echo $image ?>" alt="user profile">
     </div>
     <div>
     <div class="post-user"> 
@@ -8,6 +14,9 @@
     </div>
     <?php  echo $ROW['post']; ?>   
     <br><br>
-    <a href="">Like</a> . <a href="">Comment</a> . <span style="color: #999"> April 23 2020</span>
+    <a href="">Like</a> . <a href="">Comment</a> . 
+    <span style="color: #999">
+        <?php echo $ROW['date'] ?>
+    </span>
     </div>
 </div>
