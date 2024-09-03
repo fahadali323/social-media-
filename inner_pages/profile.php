@@ -73,7 +73,7 @@
             alt="profile image"
           />
           <br/>
-          <a class="change_profile_image" href="change_profile_image.php">Change Image</a>
+          <a class="change_profile_image" href="change_profile_image.php">Change Image | Change Cover</a>
           <br/>
           <div class="name"><?php echo $user_data['first_name'] . " " . $user_data['last_name'] ?></div>
           <br />

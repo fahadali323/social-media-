@@ -3,6 +3,7 @@
   include("./../classes/login.php"); 
   include("./../classes/user.php");
   include("./../classes/post.php");
+  include("./../classes/image.php");
 
   //isset($_SESSION['mysocial_userid'])
   $login = new Login();
@@ -12,22 +13,40 @@
   {
     if(isset($_FILES['file']['name']) && $_FILES['file']['name'] != "")
     { 
-      $filename = "../uploads/" . $_FILES['file']['name'];
-      move_uploaded_file($_FILES['file']['tmp_name'], $filename);
-
-      if(file_exists($filename))
+      if($_FILES['file']['type'] == "image/jpeg") 
       {
-        $userid = $user_data["userid"];
-        $query= "update users set profile_image='$filename' where userid='$userid' limit 1";
-        $DB = new database();
-        $DB->save($query);
+        $allowed_size = 3 * (1024 * 1024);
+        if($_FILES['file']['size'] < $allowed_size) 
+        {
+          //everything is fine
+          $filename = "../uploads/" . $_FILES['file']['name'];
+          move_uploaded_file($_FILES['file']['tmp_name'], $filename);
+    
+          $image = new Image();
+          $image->crop_image($filename, $filename, 800, 800);
 
-        header("Location: profile.php");
-        die;
+          if(file_exists($filename))
+          {
+            $userid = $user_data["userid"];
+            $query= "update users set profile_image='$filename' where userid='$userid' limit 1";
+            $DB = new database();
+            $DB->save($query);
+    
+            header("Location: profile.php");
+            die;
+          } 
+        } else {
+          echo "<div style='text-align:center; font-size: 12px; color:white;background-color:grey;'>";
+          echo "<br>The following errors occured <br><br>";
+          echo "Only images of size 3MB or lower are allowed!<br>";
+          echo "</div>";
+        }
       } else {
-
+        echo "<div style='text-align:center; font-size: 12px; color:white;background-color:grey;'>";
+        echo "<br>The following errors occured <br><br>";
+        echo "Only images of jpeg are allowed!<br>";
+        echo "</div>";
       }
-
     } else {
       echo "<div style='text-align:center; font-size: 12px; color:white;background-color:grey;'>";
       echo "<br>The following errors occured <br><br>";
@@ -60,14 +79,14 @@
         <!--friends area-->
         <div class="bottom_left">
           <div class="friends_bar">
-            <img class="profile_pic" src="./../assets/selfie.jpg" alt="selfie_image"><br>
+            <img class="profile_pic" src="<?php echo $user_data['profile_image'] ?>" alt="selfie_image"><br>
             <a class="name" href="profile.php">
               <?php echo $user_data["first_name"] . "<br> " . $user_data["last_name"]  ?>
             </a>
           </div>
         </div>
 
-        <!--posts area-->
+        <!--upload area-->
         <div class="bottom_right">
           <div class="bottom_right_area" style="min-height: 10px;">
             <form method="post" enctype="multipart/form-data">

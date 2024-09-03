@@ -7,7 +7,6 @@
   //isset($_SESSION['mysocial_userid'])
   $login = new Login();
   $user_data = $login->check_login($_SESSION["mysocial_userid"]);
-
   ?>
 
 
@@ -32,7 +31,7 @@
         <!--friends area-->
         <div class="bottom_left">
           <div class="friends_bar">
-            <img class="profile_pic" src="./../assets/selfie.jpg" alt="selfie_image"><br>
+            <img class="profile_pic" src="<?php echo $user_data['profile_image'] ?>" alt="selfie_image"><br>
             <a class="name" href="profile.php">
               <?php echo $user_data["first_name"] . "<br> " . $user_data["last_name"]  ?>
             </a>
