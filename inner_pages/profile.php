@@ -21,6 +21,7 @@
       die;
     } else {
         echo "<div style='text-align:center; font-size: 12px; color:white;background-color:grey;'>";
+        echo "<br>The following errors occured <br><br>";
         echo "The following errors occured <br>";
         echo $result;
         echo "</div>";
@@ -44,7 +45,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Profile | MySocial</title>
-    <link rel="stylesheet" href="./../styling/profile.css?v=1" />
+    <link rel="stylesheet" href="./../styling/profile.css?v=2" />
   </head>
   <body>
     <!--Top Bar-->
@@ -58,12 +59,22 @@
             src="../assets/mountain.jpg"
             alt="mountain image"
           />
+          <?php 
+          $image = "";
+          if (file_exists($user_data["profile_image"])) {
+              $image = $user_data['profile_image'];
+          } else {
+
+          }
+          ?>
           <img
             class="profile_pic"
-            src="../assets/selfie.jpg"
+            src="<?php echo $image ?>" 
             alt="profile image"
           />
-          <br />
+          <br/>
+          <a class="change_profile_image" href="change_profile_image.php">Change Image</a>
+          <br/>
           <div class="name"><?php echo $user_data['first_name'] . " " . $user_data['last_name'] ?></div>
           <br />
           <div class="menu_buttons"><a href="timeline.php">Timeline</a></div>

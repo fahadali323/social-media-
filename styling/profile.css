@@ -36,9 +36,14 @@ body {
 }
 .profile_pic {
     width:150px;
+    height: 125px;
     margin-top: -200px;
     border-radius: 50%;
     border: 2px solid white;
+}
+.change_profile_image {
+    text-decoration: none;
+    color: #f0f;
 }
 .name {
     font-size: 20px;
@@ -47,6 +52,10 @@ body {
     width: 100px;
     display: inline-block;
     margin: 2px;
+}
+.menu_buttons a {
+    text-decoration: none;
+    color: #405d9b
 }
 .bottom {
     display: flex;
@@ -77,7 +86,6 @@ body {
 }
 .bottom_right {
     flex: 2.5; 
-    min-height: 400px;
     padding: 20px;
     padding-right: 0px;
 }
@@ -85,6 +93,7 @@ body {
     border: solid thin #aaa;
     padding: 10px;
     background-color: white;
+    min-height: 90px;
 }
 textarea {
     width: 100%;
