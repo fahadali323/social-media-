@@ -22,7 +22,6 @@
     } else {
         echo "<div style='text-align:center; font-size: 12px; color:white;background-color:grey;'>";
         echo "<br>The following errors occured <br><br>";
-        echo "The following errors occured <br>";
         echo $result;
         echo "</div>";
     }
@@ -54,9 +53,17 @@
     <div class="content">
       <div class="contents">
         <div class="mountains">
+          <?php 
+          $image = "";
+          if (file_exists($user_data["cover_image"])) {
+              $image = $user_data['cover_image'];
+          } else {
+          
+          } 
+          ?>
           <img
             class="mountain_image"
-            src="../assets/mountain.jpg"
+            src="<?php echo $image ?>"
             alt="mountain image"
           />
           <?php 
@@ -73,7 +80,8 @@
             alt="profile image"
           />
           <br/>
-          <a class="change_profile_image" href="change_profile_image.php">Change Image | Change Cover</a>
+          <a class="change_profile_image" href="change_profile_image.php?change=profile">Change Profile</a> |
+          <a class="change_profile_image" href="change_profile_image.php?change=cover">Change Cover</a> 
           <br/>
           <div class="name"><?php echo $user_data['first_name'] . " " . $user_data['last_name'] ?></div>
           <br />
